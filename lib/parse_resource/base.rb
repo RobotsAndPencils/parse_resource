@@ -467,16 +467,19 @@ module ParseResource
     end
 
     def save
-      if valid?
-        if new?
-          return create
+      begin
+        if valid?
+          if new?
+            return create
+          else
+            return update
+          end
         else
-          return update
+          false
         end
-      else
+      rescue 
         false
       end
-      rescue false
     end
 
     def create
