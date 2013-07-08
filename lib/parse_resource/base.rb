@@ -585,11 +585,11 @@ module ParseResource
     def reload
       return false if new?
 
+      @deferred_loading = false
+
       fresh_object = self.class.find(id)
       @attributes.update(fresh_object.instance_variable_get('@attributes'))
       @unsaved_attributes = {}
-
-      @deferred_loading = false
 
       self
     end
