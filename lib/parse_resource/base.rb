@@ -588,7 +588,8 @@ module ParseResource
       @lazy_loading = false
 
       fresh_object = self.class.find(id)
-      @attributes.update(fresh_object.instance_variable_get('@attributes'))
+      fresh_object_attributes = fresh_object.instance_variable_get('@attributes')
+      @attributes.update(fresh_object_attributes) unless fresh_object_attributes.nil?
       @unsaved_attributes = {}
 
       self
