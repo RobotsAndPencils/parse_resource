@@ -32,7 +32,7 @@ module ParseResource
 
     define_model_callbacks :save, :create, :update, :destroy
 
-    #settings 
+    #settings
     @@settings ||= nil
     # mapping between the parse models and your models.
     @@parse_models ||= {}
@@ -44,7 +44,7 @@ module ParseResource
     #
     # @params [Hash], [Boolean] a `Hash` of attributes and a `Boolean` that should be false only if the object already exists
     # @return [ParseResource::Base] an object that subclasses `Parseresource::Base`
-    def initialize(attributes = {}, new=true, loaded_from_parse=true)     
+    def initialize(attributes = {}, new=true, loaded_from_parse=true)
       if new
         @unsaved_attributes = attributes.stringify_keys.slice(* self.class.accepted_fields)
         @unsaved_attributes = coerce_attributes(@unsaved_attributes)
@@ -284,7 +284,7 @@ module ParseResource
       #refactor to settings['app_id'] etc
       app_id     = @@settings['app_id']
       master_key = @@settings['master_key']
-      RestClient::Resource.new(self.model_base_uri, app_id, master_key)
+      RestClient::Resource.new(self.model_base_uri, { user: app_id, password: master_key, timeout: 30, open_timeout: 30 })
     end
 
     # Batch requests
@@ -300,7 +300,7 @@ module ParseResource
       app_id     = @@settings['app_id']
       master_key = @@settings['master_key']
 
-      res = RestClient::Resource.new(base_uri, app_id, master_key)
+      res = RestClient::Resource.new(base_uri, { user: app_id, password: master_key, timeout: 30, open_timeout: 30 })
 
       # Batch saves seem to fail if they're too big. We'll slice it up into multiple posts if they are.
       save_objects.each_slice(slice_size) do |objects|
@@ -381,7 +381,7 @@ module ParseResource
 
       filename = filename.parameterize
 
-      private_resource = RestClient::Resource.new "#{base_uri}/#{filename}", app_id, master_key
+      private_resource = RestClient::Resource.new("#{base_uri}/#{filename}", { user: app_id, password: master_key, timeout: 30, open_timeout: 30 })
       private_resource.post(file_instance, options) do |resp, req, res, &block|
         return false if resp.code == 400
         return JSON.parse(resp) rescue {"code" => 0, "error" => "unknown error"}
@@ -482,7 +482,7 @@ module ParseResource
         else
           false
         end
-      rescue 
+      rescue
         false
       end
     end
@@ -656,7 +656,7 @@ module ParseResource
         v = self.class.to_date_object(v)
       elsif v.respond_to?(:to_pointer)
         v = v.to_pointer
-        # if we have a mapped class then we need to change back to the parse 
+        # if we have a mapped class then we need to change back to the parse
         # class here.
         klass_name = ParseResource::Base.parse_class_name_for_model(v['className'])
         v['className'] = klass_name unless klass_name.nil?
@@ -672,7 +672,7 @@ module ParseResource
       if klass.nil? || value.class == klass
         if value.respond_to?(:to_pointer)
           value = value.to_pointer
-          # if we have a mapped class then we need to change back to the parse 
+          # if we have a mapped class then we need to change back to the parse
           # class here.
           klass_name = ParseResource::Base.parse_class_name_for_model(value['className'])
           value['className'] = klass_name unless klass_name.nil?
@@ -685,7 +685,7 @@ module ParseResource
           value = klass.parse(value)
           if value.respond_to?(:to_pointer)
             value = value.to_pointer
-            # if we have a mapped class then we need to change back to the parse 
+            # if we have a mapped class then we need to change back to the parse
             # class here.
             klass_name = ParseResource::Base.parse_class_name_for_model(value['className'])
             value['className'] = klass_name unless klass_name.nil?
