@@ -2,28 +2,9 @@
 
 require 'rubygems'
 require 'bundler'
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
-require 'rake'
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "parse_resource"
-  gem.homepage = "http://github.com/adelevie/parse_resource"
-  gem.license = "MIT"
-  gem.summary = %Q{An ActiveResource-like wrapper for the Parse REST api.}
-  gem.description = %Q{}
-  gem.email = "adelevie@gmail.com"
-  gem.authors = ["Alan deLevie"]
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
+Bundler.setup :default, :test, :development
+Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|

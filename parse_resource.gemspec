@@ -3,12 +3,13 @@
 # Instead, edit Jeweler::Tasks in Rakefile, and run 'rake gemspec'
 # -*- encoding: utf-8 -*-
 # stub: parse_resource 1.9.0 ruby lib
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name = "parse_resource"
   s.version = "1.9.0"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Alan deLevie"]
   s.date = "2015-11-10"
@@ -18,132 +19,20 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.md"
   ]
-  s.files = [
-    ".DS_Store",
-    ".document",
-    ".ruby-version",
-    ".travis.yml",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "fixtures/.DS_Store",
-    "fixtures/vcr_cassettes/.DS_Store",
-    "fixtures/vcr_cassettes/test_all.yml",
-    "fixtures/vcr_cassettes/test_attribute_getters.yml",
-    "fixtures/vcr_cassettes/test_attribute_setters.yml",
-    "fixtures/vcr_cassettes/test_authenticate.yml",
-    "fixtures/vcr_cassettes/test_chained_wheres.yml",
-    "fixtures/vcr_cassettes/test_chunk.yml",
-    "fixtures/vcr_cassettes/test_count.yml",
-    "fixtures/vcr_cassettes/test_create.yml",
-    "fixtures/vcr_cassettes/test_created_at.yml",
-    "fixtures/vcr_cassettes/test_destroy.yml",
-    "fixtures/vcr_cassettes/test_destroy_all.yml",
-    "fixtures/vcr_cassettes/test_each.yml",
-    "fixtures/vcr_cassettes/test_error_messages_includes_info_when_bad_type.yml",
-    "fixtures/vcr_cassettes/test_fetching_closest_10.yml",
-    "fixtures/vcr_cassettes/test_fetching_closest_by_kilometers.yml",
-    "fixtures/vcr_cassettes/test_fetching_closest_by_miles.yml",
-    "fixtures/vcr_cassettes/test_fetching_closest_by_radians.yml",
-    "fixtures/vcr_cassettes/test_fetching_closest_within_box.yml",
-    "fixtures/vcr_cassettes/test_fetching_geopoint_field.yml",
-    "fixtures/vcr_cassettes/test_find.yml",
-    "fixtures/vcr_cassettes/test_find_all_by.yml",
-    "fixtures/vcr_cassettes/test_find_by.yml",
-    "fixtures/vcr_cassettes/test_first.yml",
-    "fixtures/vcr_cassettes/test_id.yml",
-    "fixtures/vcr_cassettes/test_installation_creation.yml",
-    "fixtures/vcr_cassettes/test_installation_creation_validation_check.yml",
-    "fixtures/vcr_cassettes/test_limit.yml",
-    "fixtures/vcr_cassettes/test_map.yml",
-    "fixtures/vcr_cassettes/test_nested_classes_update_using_mapped_names.yml",
-    "fixtures/vcr_cassettes/test_nested_classes_using_mapped_names.yml",
-    "fixtures/vcr_cassettes/test_order_ascending.yml",
-    "fixtures/vcr_cassettes/test_order_descending.yml",
-    "fixtures/vcr_cassettes/test_save.yml",
-    "fixtures/vcr_cassettes/test_save_all_and_destroy_all.yml",
-    "fixtures/vcr_cassettes/test_saving_geo_point_with_quick_init.yml",
-    "fixtures/vcr_cassettes/test_saving_geopoint_with_coords.yml",
-    "fixtures/vcr_cassettes/test_skip.yml",
-    "fixtures/vcr_cassettes/test_that_save_calls_the_before_save_callback.yml",
-    "fixtures/vcr_cassettes/test_that_update_calls_the_before_save_callback.yml",
-    "fixtures/vcr_cassettes/test_that_update_calls_the_before_update_callback.yml",
-    "fixtures/vcr_cassettes/test_update.yml",
-    "fixtures/vcr_cassettes/test_updated_at.yml",
-    "fixtures/vcr_cassettes/test_username_should_be_unique.yml",
-    "fixtures/vcr_cassettes/test_where.yml",
-    "lib/.DS_Store",
-    "lib/kaminari_extension.rb",
-    "lib/parse_resource.rb",
-    "lib/parse_resource/base.rb",
-    "lib/parse_resource/client.rb",
-    "lib/parse_resource/parse_error.rb",
-    "lib/parse_resource/parse_exceptions.rb",
-    "lib/parse_resource/parse_user.rb",
-    "lib/parse_resource/parse_user_validator.rb",
-    "lib/parse_resource/query.rb",
-    "lib/parse_resource/query_methods.rb",
-    "lib/parse_resource/types/parse_geopoint.rb",
-    "parse_resource.gemspec",
-    "parse_resource.yml",
-    "rdoc/ParseResource.html",
-    "rdoc/created.rid",
-    "rdoc/index.html",
-    "rdoc/lib/parse_resource_rb.html",
-    "rdoc/rdoc.css",
-    "test/active_model_lint_test.rb",
-    "test/helper.rb",
-    "test/test_parse_installation.rb",
-    "test/test_parse_resource.rb",
-    "test/test_parse_resource_callbacks.rb",
-    "test/test_parse_resource_extensions.rb",
-    "test/test_parse_user.rb",
-    "test/test_query.rb",
-    "test/test_query_options.rb",
-    "test/test_types.rb"
-  ]
+
+  s.files         = `git ls-files -z`.split("\x0")
   s.homepage = "http://github.com/adelevie/parse_resource"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.2.5"
   s.summary = "An ActiveResource-like wrapper for the Parse REST api."
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rest-client>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
-      s.add_runtime_dependency(%q<activemodel>, [">= 0"])
-      s.add_runtime_dependency(%q<json>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<reek>, ["~> 1.2.8"])
-      s.add_development_dependency(%q<vcr>, [">= 0"])
-      s.add_development_dependency(%q<webmock>, [">= 0"])
-      s.add_development_dependency(%q<turn>, [">= 0"])
-    else
-      s.add_dependency(%q<rest-client>, [">= 0"])
-      s.add_dependency(%q<activesupport>, [">= 0"])
-      s.add_dependency(%q<activemodel>, [">= 0"])
-      s.add_dependency(%q<json>, [">= 0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<reek>, ["~> 1.2.8"])
-      s.add_dependency(%q<vcr>, [">= 0"])
-      s.add_dependency(%q<webmock>, [">= 0"])
-      s.add_dependency(%q<turn>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<rest-client>, [">= 0"])
-    s.add_dependency(%q<activesupport>, [">= 0"])
-    s.add_dependency(%q<activemodel>, [">= 0"])
-    s.add_dependency(%q<json>, [">= 0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<reek>, ["~> 1.2.8"])
-    s.add_dependency(%q<vcr>, [">= 0"])
-    s.add_dependency(%q<webmock>, [">= 0"])
-    s.add_dependency(%q<turn>, [">= 0"])
-  end
+  s.add_runtime_dependency 'rest-client'
+  s.add_runtime_dependency 'activesupport'
+  s.add_runtime_dependency 'activemodel'
+  s.add_runtime_dependency 'json'
+  s.add_development_dependency 'bundler', "~> 1.7"
+  s.add_development_dependency "rake", "~> 10.0"
+  s.add_development_dependency 'reek', "~> 1.2.8"
+  s.add_development_dependency 'vcr'
+  s.add_development_dependency 'webmock'
+  s.add_development_dependency 'turn'
 end
-
